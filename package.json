@@ -5,7 +5,9 @@
   },
   "author": "Luke Edwards <luke.edwards05@gmail.com>",
   "dependencies": {
-    "dio.js": "^3.4.0"
+    "dio.js": "^3.4.0",
+    "todomvc-app-css": "^2.0.6",
+    "todomvc-common": "^1.0.3"
   },
   "devDependencies": {
     "eslint-config-standard": "^6.2.1",
