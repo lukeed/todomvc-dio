@@ -1,3 +1,4 @@
+import jsx from 'rollup-plugin-jsx';
 import buble from 'rollup-plugin-buble';
 import replace from 'rollup-plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
@@ -7,6 +8,9 @@ export default {
 	entry: 'src/index.js',
 	format: 'iife',
 	plugins: [
+		jsx({
+			factory: 'h'
+		}),
 		buble(),
 		replace({
 			'process.env.NODE_ENV': JSON.stringify('development')
@@ -16,5 +20,5 @@ export default {
 			main: true
 		})
 	],
-	sourceMap: true
+	sourceMap: false
 };
