@@ -16,21 +16,10 @@ function addItem(e) {
 	}
 }
 
-function toggleOne(d) {
-	dispatch('toggle', d.id);
-}
-
-function toggleAll() {
-	dispatch('toggles', this.checked);
-}
-
-function removeOne(d) {
-	dispatch('remove', d.id);
-}
-
-function removeAll() {
-	dispatch('removes');
-}
+const toggleOne = d => dispatch('toggle', d.id);
+const toggleAll = e => dispatch('toggles', e.target.checked);
+const removeOne = d => dispatch('remove', d.id);
+const removeAll = _ => dispatch('removes');
 
 const App = () => ({
 	getInitialState: () => ({route: 'all', focus: null}),

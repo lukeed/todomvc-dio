@@ -1,7 +1,5 @@
 import {ENTER, ESCAPE, link} from './share';
 
-// const ref = dio.stream();
-
 function handleKeys(d, e) {
 	if (e.which === ENTER) {
 		return e.target.blur();
