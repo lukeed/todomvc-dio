@@ -13,7 +13,7 @@ export default function Item({d, doToggle, doRemove}) {
 		<li className="test">
 			<div className="view">
 				<input className="toggle" type="checkbox"
-					checked={ d.completed } onClick={ doToggle }
+					checked={ d.completed } onClick={ link(d, doToggle) }
 				/>
 				<label onDblClick={ doFocus }>{ d.title }</label>
 				<button className="destroy" onClick={ link(d, doRemove) } />

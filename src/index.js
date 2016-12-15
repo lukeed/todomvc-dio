@@ -16,8 +16,8 @@ function addItem(e) {
 	}
 }
 
-function toggleOne() {
-	dispatch('toggle', this.id);
+function toggleOne(d) {
+	dispatch('toggle', d.id);
 }
 
 function toggleAll() {
