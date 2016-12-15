@@ -16,7 +16,7 @@ function setData(data) {
 export default function (state, action) {
 	state = state || getData();
 
-	const id = action.id;
+	const val = action.val;
 
 	// const put = obj => setData(
 	// 	state.todos.map(t => t.id !== id ? t : Object.assign({}, t, obj))
@@ -25,11 +25,11 @@ export default function (state, action) {
 	switch (action.type) {
 		case 'add':
 			return setData(
-				state.todos.concat({id: uuid(), title: action.val, completed: false})
+				state.todos.concat({id: uuid(), title: val, completed: false})
 			);
 		case 'toggle':
 			return setData(
-				state.todos.map(t => t.id !== id ? t : Object.assign({}, t, {completed: !t.completed}))
+				state.todos.map(t => t.id !== val ? t : Object.assign({}, t, {completed: !t.completed}))
 			);
 		case 'toggles':
 			return setData(
@@ -37,7 +37,7 @@ export default function (state, action) {
 			);
 		case 'remove':
 			return setData(
-				state.todos.filter(t => t.id !== id)
+				state.todos.filter(t => t.id !== val)
 			);
 		case 'removes':
 			return setData(

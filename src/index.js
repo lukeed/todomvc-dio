@@ -3,6 +3,7 @@ import Model from './model';
 import Item from './item';
 
 const store = dio.createStore(Model);
+const dispatch = (type, val) => store.dispatch({type, val});
 
 function addItem(e) {
 	if (e.which !== ENTER) {
@@ -10,21 +11,21 @@ function addItem(e) {
 	}
 	const val = e.target.value.trim();
 	if (val) {
-		store.dispatch({type: 'add', val: val});
+		dispatch('add', val);
 		e.target.value = '';
 	}
 }
 
 function toggleOne() {
-	store.dispatch({type: 'toggle', id: this.id});
+	dispatch('toggle', this.id);
 }
 
 function toggleAll() {
-	store.dispatch({type: 'toggles', val: this.checked});
+	dispatch('toggles', this.checked);
 }
 
 function removeOne(d) {
-	store.dispatch({type: 'remove', id: d.id});
+	dispatch('remove', d.id);
 }
 
 const App = () => ({
