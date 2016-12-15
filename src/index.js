@@ -1,4 +1,4 @@
-import {ENTER, filters, plural} from './share';
+import {ENTER, filters, hash, plural} from './share';
 import Model from './model';
 import Item from './item';
 
@@ -23,7 +23,14 @@ const removeOne = d => dispatch('remove', d.id);
 const removeAll = _ => dispatch('removes');
 
 const App = () => ({
-	getInitialState: () => ({route: 'all', focus: null}),
+	componentWillMount: function () {
+		window.onhashchange = () => this.setState({route: hash()});
+	},
+
+	getInitialState: () => ({
+		focus: null,
+		route: hash()
+	}),
 
 	componentWillReceiveProps: p => {
 		p.todos = store.getState().todos;
@@ -67,7 +74,7 @@ const App = () => ({
 								{className: 'todo-list'},
 								shown.map(t => Item({
 									d: t,
-									edits: focus == t.id,
+									edits: focus === t.id,
 									doEdit: self.edit,
 									doFocus: self.focus,
 									doToggle: toggleOne,
@@ -95,8 +102,6 @@ const App = () => ({
 	}
 });
 
-const render = dio.render(App, '#app');
-
-store.connect(render);
-
-dio.router({'/:filter': render});
+store.connect(
+	dio.render(App, '#app')
+);
