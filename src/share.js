@@ -11,3 +11,9 @@ export const filters = {
 export const uuid = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 
 export const plural = (num, str) => num === 1 ? str : `${str}s`;
+
+export function link(data, cb) {
+	return function (e) {
+		return cb.apply(this, [data, e]);
+	};
+}

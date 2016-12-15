@@ -1,11 +1,7 @@
+import {link} from './share';
+
 function doFocus(e) {
 	console.log('edit item', e);
-}
-
-function link(data, cb) {
-	return function (e) {
-		return cb.apply(this, [data, e]);
-	};
 }
 
 export default function Item({d, doToggle, doRemove}) {
