@@ -33,13 +33,18 @@ function removeAll() {
 }
 
 const App = () => ({
-	getInitialState: () => ({route: 'all'}),
+	getInitialState: () => ({route: 'all', focus: null}),
 
 	componentWillReceiveProps: p => {
 		p.todos = store.getState().todos;
 	},
 
-	render: ({todos}, {route}) => {
+	focus: function (d) {
+		this.setState({focus: d.id});
+	},
+
+	render: function ({todos}, {route, focus}) {
+		const self = this;
 		const num = todos.length;
 		const shown = todos.filter(filters[route]);
 		const numDone = todos.filter(filters.completed).length;
@@ -65,6 +70,8 @@ const App = () => ({
 								{className: 'todo-list'},
 								shown.map(t => Item({
 									d: t,
+									edits: focus == t.id,
+									doFocus: self.focus,
 									doToggle: toggleOne,
 									doRemove: removeOne
 								}))
