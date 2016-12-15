@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "rollup -c config/dev.js",
+    "build": "rollup -c config/prod.js",
     "test": "xo"
   },
   "author": "Luke Edwards <luke.edwards05@gmail.com>",
@@ -16,14 +17,23 @@
     "rollup-plugin-jsx": "^1.0.3",
     "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-uglify": "^1.0.1",
     "xo": "^0.17.1"
   },
   "xo": {
     "globals": [
-      "dio"
+      "dio",
+      "h"
     ],
     "envs": [
       "browser"
-    ]
+    ],
+    "rules": {
+      "no-unused-expressions": 0,
+      "no-negated-condition": 1,
+      "no-mixed-operators": 0,
+      "no-unused-vars": 1,
+      "new-cap": 1
+    }
   }
 }
