@@ -1,4 +1,4 @@
-import {ENTER, filters} from './share';
+import {ENTER, filters, plural} from './share';
 import Model from './model';
 import Item from './item';
 
@@ -26,6 +26,10 @@ function toggleAll() {
 
 function removeOne(d) {
 	dispatch('remove', d.id);
+}
+
+function removeAll() {
+	dispatch('removes');
 }
 
 const App = () => ({
@@ -66,6 +70,17 @@ const App = () => ({
 								}))
 						) }
 					</section>
+				) : null }
+
+				{ (numDone || numActive) ? (
+					<footer className="footer">
+						<span className="todo-count">
+							<strong>{ numActive }</strong> { plural(numActive, 'item') } left
+						</span>
+						<ul className="filters">
+						</ul>
+						{ numDone && <button className="clear-completed" onClick={ removeAll }>Clear completed</button> }
+					</footer>
 				) : null }
 			</div>
 		);
