@@ -27,6 +27,10 @@ export default function (state, action) {
 			return setData(
 				state.todos.concat({id: uuid(), title: val, completed: false})
 			);
+		case 'edit':
+			return setData(
+				state.todos.map(t => t.id !== val.id ? t : Object.assign({}, t, {title: val.title}))
+			);
 		case 'toggle':
 			return setData(
 				state.todos.map(t => t.id !== val ? t : Object.assign({}, t, {completed: !t.completed}))

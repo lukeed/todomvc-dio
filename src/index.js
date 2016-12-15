@@ -43,6 +43,12 @@ const App = () => ({
 		this.setState({focus: d.id});
 	},
 
+	edit: function (d, e) {
+		const val = e.target.value.trim();
+		val ? dispatch('edit', {id: d.id, title: val}) : removeOne(d);
+		this.setState({focus: null});
+	},
+
 	render: function ({todos}, {route, focus}) {
 		const self = this;
 		const num = todos.length;
@@ -71,6 +77,7 @@ const App = () => ({
 								shown.map(t => Item({
 									d: t,
 									edits: focus == t.id,
+									doEdit: self.edit,
 									doFocus: self.focus,
 									doToggle: toggleOne,
 									doRemove: removeOne
