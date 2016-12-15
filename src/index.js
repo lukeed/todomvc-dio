@@ -28,8 +28,9 @@ const App = () => ({
 		p.todos = store.getState().todos;
 	},
 
-	focus: function (d) {
+	focus: function (d, e) {
 		this.setState({focus: d.id});
+		setTimeout(() => e.target.parentNode.nextSibling.focus(), 1);
 	},
 
 	edit: function (d, e) {
