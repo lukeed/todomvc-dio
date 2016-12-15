@@ -2,6 +2,7 @@ import {ENTER, filters, plural} from './share';
 import Model from './model';
 import Item from './item';
 
+const _sel = 'selected';
 const store = dio.createStore(Model);
 const dispatch = (type, val) => store.dispatch({type, val});
 
@@ -82,6 +83,9 @@ const App = () => ({
 							<strong>{ numActive }</strong> { plural(numActive, 'item') } left
 						</span>
 						<ul className="filters">
+							<li><a href="#/" className={ route === 'all' && _sel }>All</a></li>
+							<li><a href="#/active" className={ route === 'active' && _sel }>Active</a></li>
+							<li><a href="#/completed" className={ route === 'completed' && _sel }>Completed</a></li>
 						</ul>
 						{ numDone && <button className="clear-completed" onClick={ removeAll }>Clear completed</button> }
 					</footer>
