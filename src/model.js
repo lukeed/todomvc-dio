@@ -35,6 +35,14 @@ export default function (state, action) {
 			return setData(
 				state.todos.map(t => Object.assign({}, t, {completed: action.val}))
 			);
+		case 'remove':
+			return setData(
+				state.todos.filter(t => t.id !== id)
+			);
+		case 'removes':
+			return setData(
+				state.todos.filter(t => !t.completed)
+			);
 		default:
 			return state;
 	}

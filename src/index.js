@@ -19,8 +19,12 @@ function toggleOne() {
 	store.dispatch({type: 'toggle', id: this.id});
 }
 
-function toggleAll(e) {
-	store.dispatch({type: 'toggles', val: e.target.checked});
+function toggleAll() {
+	store.dispatch({type: 'toggles', val: this.checked});
+}
+
+function removeOne(d) {
+	store.dispatch({type: 'remove', id: d.id});
 }
 
 const App = () => ({
@@ -57,7 +61,7 @@ const App = () => ({
 								shown.map(t => Item({
 									d: t,
 									doToggle: toggleOne,
-									doRemove: () => console.log('hello')
+									doRemove: removeOne
 								}))
 						) }
 					</section>
