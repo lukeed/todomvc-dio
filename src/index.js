@@ -1,20 +1,33 @@
 import {ENTER, filters} from './share';
-// import Model from './model';
+import Model from './model';
+import Item from './item';
 
-// const store = dio.createStore(Model);
-const store = {dispatch: function () {}};
+const store = dio.createStore(Model);
 
 function addItem(e) {
-	if (e.which !== ENTER) return;
+	if (e.which !== ENTER) {
+		return;
+	}
 	const val = e.target.value.trim();
-	store.dispatch({type: 'add'});
+	if (val) {
+		store.dispatch({type: 'add', val: val});
+		e.target.value = '';
+	}
+}
+
+function toggleOne() {
+	store.dispatch({type: 'toggle', id: this.id});
+}
+
+function toggleAll(e) {
+	store.dispatch({type: 'toggles', val: e.target.checked});
 }
 
 const App = () => ({
 	getInitialState: () => ({route: 'all'}),
 
 	componentWillReceiveProps: p => {
-		p.todos = [];
+		p.todos = store.getState().todos;
 	},
 
 	render: ({todos}, {route}) => {
@@ -39,10 +52,14 @@ const App = () => ({
 						<input className="toggle-all" type="checkbox"
 							onChange={ toggleAll } checked={ numActive === 0 }
 						/>
-
-						<ul className="todo-list">
-							{ shown.map(t => <Item d={t} />) }
-						</ul>
+						{ h('ul',
+								{className: 'todo-list'},
+								shown.map(t => Item({
+									d: t,
+									doToggle: toggleOne,
+									doRemove: () => console.log('hello')
+								}))
+						) }
 					</section>
 				) : null }
 			</div>
@@ -50,5 +67,8 @@ const App = () => ({
 	}
 });
 
-// store.connect(App, '#app');
-dio.render(App, document.getElementById('app'));
+const render = dio.render(App, '#app');
+
+store.connect(render);
+
+dio.router({'/:filter': render});
