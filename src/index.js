@@ -47,8 +47,7 @@ const App = () => ({
 		this.setState({focus: null});
 	},
 
-	render: function ({todos}, {route, focus}) {
-		const self = this;
+	render: function ({todos}, {route, focus}, ctx) {
 		const num = todos.length;
 		const shown = todos.filter(filters[route]);
 		const numDone = todos.filter(filters.completed).length;
@@ -75,8 +74,8 @@ const App = () => ({
 								shown.map(t => Item({
 									d: t,
 									edits: focus === t.id,
-									doEdit: self.edit,
-									doFocus: self.focus,
+									doEdit: ctx.edit,
+									doFocus: ctx.focus,
 									doToggle: toggleOne,
 									doRemove: removeOne
 								}))
