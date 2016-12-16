@@ -23,17 +23,18 @@ const removeOne = d => dispatch('remove', d.id);
 const removeAll = _ => dispatch('removes');
 
 const App = () => ({
-	componentWillMount: function () {
-		window.onhashchange = () => this.setState({route: hash()});
+	constructor() {
+		this.state = {focus: null, route: hash()};
+		this.focus = this.focus.bind(this);
+		this.edit = this.edit.bind(this);
 	},
 
-	getInitialState: () => ({
-		focus: null,
-		route: hash()
+	getDefaultProps: () => ({
+		todos: store.getState().todos
 	}),
 
-	componentWillReceiveProps: p => {
-		p.todos = store.getState().todos;
+	componentWillMount: function () {
+		window.onhashchange = () => this.setState({route: hash()});
 	},
 
 	focus: function (d, e) {
