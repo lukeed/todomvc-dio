@@ -82,7 +82,7 @@ const App = () => ({
 								}))
 						) }
 					</section>
-				) : null }
+				) : '' }
 
 				{ (numDone || numActive) ? (
 					<footer className="footer">
@@ -94,9 +94,9 @@ const App = () => ({
 							<li><a href="#/active" className={ route === 'active' && _sel }>Active</a></li>
 							<li><a href="#/completed" className={ route === 'completed' && _sel }>Completed</a></li>
 						</ul>
-						{ numDone && <button className="clear-completed" onClick={ removeAll }>Clear completed</button> }
+						{ numDone ? <button className="clear-completed" onClick={ removeAll }>Clear completed</button> : '' }
 					</footer>
-				) : null }
+				) : '' }
 			</div>
 		);
 	}
