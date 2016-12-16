@@ -29,11 +29,11 @@ export default function (state, action) {
 			);
 		case 'edit':
 			return setData(
-				state.todos.map(t => t.id !== val.id ? t : Object.assign({}, t, {title: val.title}))
+				state.todos.map(t => t.id !== val.id ? t : Object.assign(t, {title: val.title}))
 			);
 		case 'toggle':
 			return setData(
-				state.todos.map(t => t.id !== val ? t : Object.assign({}, t, {completed: !t.completed}))
+				state.todos.map(t => t.id !== val ? t : Object.assign(t, {completed: !t.completed}))
 			);
 		case 'toggles':
 			return setData(
