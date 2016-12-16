@@ -16,6 +16,6 @@ export const hash = () => location.hash.replace('#/', '') || 'all';
 
 export function link(data, cb) {
 	return function (e) {
-		return cb.apply(this, [data, e]);
+		return cb(data, e);
 	};
 }
